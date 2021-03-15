@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+body{
+	background-color: #FFF0B5;
+	font-size: 9pt;
+}
+table{
+	background-color: yellow;
+	border: pink solid 2px;
+}
+tr{
+	background-color: #FFE271;
+}
+tr:hover{
+	background-color: orange;
+	color: green;
+	cursor: pointer;
+}
+td, th{
+	text-align: center;
+	padding: 5px;
+}
+.left{
+	text-align: left;
+}
+caption{
+	font-size:20px;
+	font-style: inherit;
+}

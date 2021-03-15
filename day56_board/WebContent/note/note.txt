@@ -1,0 +1,74 @@
+
+  paging
+  
+  
+  전체 게시글 개수
+  Board1DAO dao = Board1DAO.getInstance();
+  int total = dao.getTotal();
+  
+  현재 페이지
+  int curPage = Integer.parseInt(pageNum);
+  
+  final int PAGESIZE  = 10;  // 한 페이지에 보여주는 게시글 개수
+  final int BLOCKSIZE = 10;  // 한블럭당 페이지수
+  
+  
+  한 블럭이라 함은
+  아래의 페이지 네비게이션 한 줄 한 줄을 의미함
+  
+  <<  1  2  3  4  5  6  7  8  9 10 >>
+  << 11 12 13 14 15 16 17 18 19 20 >> 
+  << 21 22 23 24 25 26 27 28 29 30 >> 
+  << 31 32 33 34 35 36 37 38 39 40 >> 
+  
+
+  시작번호 = (현재페이지번호 - 1) * 페이지당글개수 + 1
+    끝번호 = 시작번호 + 페이지당개수 - 1
+  
+  int startRow = (curPage - 1) * PAGESIZE + 1
+  int endRow   = startRow + PAGESIZE - 1
+  
+  
+  
+  페이지 네비게이션 : Block
+  
+  <<  1  2  3  4  5  6  7  8  9 10 >>
+  << 11 12 13 14 15 16 17 18 19 20 >> 
+  << 21 22 23 24 25 26 27 28 29 30 >> 
+  << 31 32 33 34 35 36 37 38 39 40 >> 
+  << 41 42 43 44 45 46 47 48 49 50 >> 
+  << 51 52 53 54 55 56 57 58 59 60 >> 
+  << 61 62 63 64 65 66 67 68 69 70 >> 
+  << 71 72 73 >>
+  
+  73 : 721 ~ 730 <-- 726 page
+  
+  block 시작
+  
+  
+  페이지 개수 = Math.ceil(전체게시글개수 / 페이지당글개수)
+  int pageCount = Math.ceil((double)total / PAGESIZE)
+  
+  현재블럭의 시작페이지 = (현재페이지 - 1) / 10 * 10 + 1 
+  int startPage = (curPage - 1) / 10 * 10 + 1
+    
+  현재블럭의   끝페이지 = 시작페이지 + 블럭당페이지수 - 1
+  int endPage  =  startPage + BLOCKSIZE - 1
+  
+  if(endPage > pageCount){
+    endPage = pageCount;
+  }
+  
+  int rowNum = 전체개시글수 - 시작번호
+  int rowNum = total - startRow;
+  
+  if(total == 0){
+    out.println("<tr><td>데이터가 없습니다</td></tr>");
+  }
+  
+  
+  
+  
+  </table>
+  
+  

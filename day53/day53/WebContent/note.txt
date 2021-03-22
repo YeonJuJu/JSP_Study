@@ -1,0 +1,42 @@
+
+
+ cookie 사용한 회원가입 / 로그인
+ 
+ joinForm.jsp(회원가입) - id, password, name
+   
+   ↓
+   
+ join.jsp
+   MemberDTO 객체 생성(jsp:useBean 액션태그 dto)
+   memberDto.setters() 데이터를 setting (jsp:setProperty)
+   // Singleton pattern
+   MemberDAO 객체 생성(MemberDAO 클래스의 getInstance() 메소드 사용 )
+   dao.insert()메소드에서 (MEMBER table)에 data 입력
+
+실패 -> joinForm.jsp(회원가입) : alert,  history.go(-1)
+
+   
+성공 -> loginForm.jsp(로그인) : id, password
+
+  login.jsp (로그인 처리) 
+  
+  MemberDAO 객체 생성
+  dao.check(id, password)
+    - id 값으로 MEMBER 테이블에 있는 record를 읽지 못하면
+      없는 id라는 에러 경고창을 띄운 후,
+      loginForm.jsp 로 이동
+    - id는 있으나 password가 틀린 경우
+      암호가 맞지 않습니다. 경고 창을 띄운 후
+      loginForm.jsp 로 이동
+    - id, password가 일치하는 경우,
+      cookie를 생성하고 저장한 후에 main.jsp로 이동함  
+       new Cookie()      response.addCookie()
+       
+main.jsp      
+    - cookie가 없거나 비어있으면 loginForm.jsp로 이동  
+    - cookie가 제대로 있으면 환영인사를 출력함
+    
+logout.jsp
+    - 쿠키 사용 못하도록 변경함
+    
+    

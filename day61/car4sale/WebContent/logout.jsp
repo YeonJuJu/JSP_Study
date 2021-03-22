@@ -10,7 +10,8 @@
 </head>
 <body>
 	<%
-		session.invalidate();
+		//session.invalidate();
+		session.removeAttribute("id");
 		System.out.println("로그아웃성공");
 	%>
 	
